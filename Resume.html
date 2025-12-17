@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoseph Kinfu - Senior Salesforce Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 3rem 2rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: scaleIn 1s ease-out;
+        }
+
+        .profile-icon {
+            width: 150px;
+            height: 150px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: float 3s ease-in-out infinite;
+            overflow: hidden;
+            border: 5px solid white;
+        }
+
+        .profile-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .profile h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .profile p {
+            font-size: 1.1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.6s; }
+        .section:nth-child(3) { animation-delay: 0.8s; }
+        .section:nth-child(4) { animation-delay: 1s; }
+
+        .section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .section:hover h2 {
+            border-bottom-color: #f39c12;
+            padding-left: 10px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        .contact-item svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover svg {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skills-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #f39c12;
+            transition: all 0.3s ease;
+        }
+
+        .skills-list li:hover {
+            transform: translateX(10px);
+            color: #f39c12;
+        }
+
+        .skills-list li:hover:before {
+            transform: scale(1.5);
+        }
+
+        .cert-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            border-left: 3px solid #f39c12;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cert-badge:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px) scale(1.05);
+            border-left-width: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #f8f9fa;
+            padding: 3rem 4rem;
+        }
+
+        .main-section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            opacity: 0;
+            animation: slideInRight 0.8s ease-out forwards;
+            transition: all 0.3s ease;
+        }
+
+        .main-section:nth-child(1) { animation-delay: 0.2s; }
+        .main-section:nth-child(2) { animation-delay: 0.4s; }
+        .main-section:nth-child(3) { animation-delay: 0.6s; }
+
+        .main-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .main-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: #f39c12;
+            transition: left 0.5s ease;
+        }
+
+        .main-section:hover h2:after {
+            left: 0;
+        }
+
+        .summary-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .job {
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .job:hover {
+            background: #f8f9fa;
+            border-left-color: #3498db;
+            transform: translateX(10px);
+        }
+
+        .job:last-child {
+            margin-bottom: 0;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .job:hover .job-title {
+            color: #3498db;
+        }
+
+        .job-date {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .job:hover .job-date {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .company {
+            color: #3498db;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .job:hover .company {
+            color: #f39c12;
+            transform: translateX(5px);
+        }
+
+        .job-description {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .job-description ul {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .job-description li {
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .job-description li:hover {
+            color: #3498db;
+            transform: translateX(5px);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid #bdc3c7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            animation: scaleIn 0.5s ease-out forwards;
+        }
+
+        .tech-tag:nth-child(1) { animation-delay: 0.1s; }
+        .tech-tag:nth-child(2) { animation-delay: 0.2s; }
+        .tech-tag:nth-child(3) { animation-delay: 0.3s; }
+        .tech-tag:nth-child(4) { animation-delay: 0.4s; }
+        .tech-tag:nth-child(5) { animation-delay: 0.5s; }
+        .tech-tag:nth-child(6) { animation-delay: 0.6s; }
+
+        .tech-tag:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.4);
+        }
+
+        .education-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .education-item:hover {
+            background: #f8f9fa;
+            transform: translateX(10px);
+        }
+
+        .education-item h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .education-item:hover h3 {
+            color: #3498db;
+        }
+
+        .education-item p {
+            color: #7f8c8d;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 350px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db 0%, #f39c12 100%);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                height: auto;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .scroll-indicator {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .sidebar {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip:before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .tooltip:hover:before {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        #uploadBtn {
+            display: none;
+        }
+
+        .upload-label {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .upload-label:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <div class="profile-icon" data-tooltip="Your Professional Photo">
+                    <img id="profileImg" src="" alt="Profile Photo">
+                </div>
+                <input type="file" id="uploadBtn" accept="image/*">
+                <label for="uploadBtn" class="upload-label">📷 Upload Photo</label>
+                <h1>Yoseph Kinfu</h1>
+                <p>Senior Salesforce Developer</p>
+            </div>
+
+            <div class="section">
+                <h2>Contact</h2>
+                <div class="contact-item tooltip" data-tooltip="Email me!" onclick="window.location.href='mailto:Yosephkinfu@gmail.com'">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                    Yosephkinfu@gmail.com
+                </div>
+                <div class="contact-item tooltip" data-tooltip="Call me!" onclick="window.location.href='tel:+13013573615'">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                    (301) 357-3615
+                </div>
+                <div class="contact-item">
+                    <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                    Silver Spring, MD 20906
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Core Skills</h2>
+                <ul class="skills-list">
+                    <li>Salesforce Development (Apex, LWC, Aura)</li>
+                    <li>Lightning Components</li>
+                    <li>Visualforce & SOQL</li>
+                    <li>REST/SOAP APIs</li>
+                    <li>Process Builder & Flows</li>
+                    <li>Community Cloud</li>
+                    <li>Marketing Cloud</li>
+                    <li>SharePoint Development</li>
+                    <li>MS Power Apps & Flow</li>
+                    <li>Agile Methodology</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Certifications</h2>
+                <div class="cert-badge">✓ Salesforce Administrator</div>
+                <div class="cert-badge">✓ App Builder</div>
+                <div class="cert-badge">✓ Platform Developer I & II</div>
+                <div class="cert-badge">✓ Sales Cloud Consultant</div>
+                <div class="cert-badge">✓ Service Cloud Consultant</div>
+                <div class="cert-badge">✓ Sharing & Visibility Designer</div>
+                <div class="cert-badge">✓ Data Architecture Designer</div>
+                <div class="cert-badge">✓ Solution Architect</div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="main-section">
+                <h2>Professional Summary</h2>
+                <p class="summary-text">
+                    Certified Senior Salesforce Developer/Administrator with 6+ years of IT experience specializing in Sales Cloud and Service Cloud. Expert in full Salesforce Development Life Cycle with proven success in designing custom Lightning components, implementing complex business automation, and building scalable solutions. Strong background in Apex development, API integrations, and cross-functional team collaboration. Experienced in both Agile and Waterfall methodologies with exceptional leadership and problem-solving skills.
+                </p>
+            </div>
+
+            <div class="main-section">
+                <h2>Work Experience</h2>
+                
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Senior Consultant / Senior Salesforce Developer</div>
+                        <div class="job-date">Dec 2018 - Present</div>
+                    </div>
+                    <div class="company">Deloitte - Roslyn, VA</div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Lead development of key Salesforce applications providing guided user experiences that reduced training time and increased automation by 40%</li>
+                            <li>Built and deployed 50+ Lightning Components with custom server-side controllers, successfully migrating standard and custom objects to Lightning Experience</li>
+                            <li>Designed and implemented multiple public-facing portals using Community Cloud, serving 10,000+ external users</li>
+                            <li>Developed custom objects, reports, and analytical snapshots for sales performance tracking and lead generation analytics</li>
+                            <li>Created automated workflows for lead routing, escalation, and alerts, improving sales team efficiency by 30%</li>
+                            <li>Led database migration initiatives from Siebel to Salesforce using Informatica integration tools</li>
+                            <li>Provided training to 50+ internal business users on application usage and custom report development</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Lightning Components</span>
+                            <span class="tech-tag">Apex</span>
+                            <span class="tech-tag">Community Cloud</span>
+                            <span class="tech-tag">VS Code</span>
+                            <span class="tech-tag">Data Loader</span>
+                            <span class="tech-tag">Informatica</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">Salesforce Developer / Administrator</div>
+                        <div class="job-date">Jul 2014 - Dec 2018</div>
+                    </div>
+                    <div class="company">Sodexo Inc. - Gaithersburg, MD</div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Supported Law Department's CLM implementation using Apttus Contract Management tool, streamlining contract processes</li>
+                            <li>Designed and developed custom objects, page layouts, Visual Force pages, and Apex classes through full SDLC</li>
+                            <li>Implemented X-Author tool for contract generation and data migration, integrating with Adobe Sign for approvals</li>
+                            <li>Created workflow rules, validation rules, and Apex triggers to automate business processes</li>
+                            <li>Managed Salesforce security setup including profiles, permission sets, OWD, role hierarchy, and sharing rules</li>
+                            <li>Conducted business analysis for Apttus CLM process design, capabilities, and integration requirements</li>
+                            <li>Coordinated with QA team for comprehensive testing of all development changes</li>
+                            <li>Managed multiple related projects ensuring goals were achieved within scope, time, and budget</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Apttus CLM</span>
+                            <span class="tech-tag">Apex Triggers</span>
+                            <span class="tech-tag">Visualforce</span>
+                            <span class="tech-tag">X-Author</span>
+                            <span class="tech-tag">Adobe Sign</span>
+                            <span class="tech-tag">Agile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job">
+                    <div class="job-header">
+                        <div class="job-title">SharePoint Developer</div>
+                        <div class="job-date">2014 - 2018</div>
+                    </div>
+                    <div class="company">Sodexo Inc. - Gaithersburg, MD</div>
+                    <div class="job-description">
+                        <ul>
+                            <li>Migrated Law Department sites from SharePoint 2010 to SharePoint Online using ShareGate</li>
+                            <li>Developed custom workflows, navigation, and content types based on requirements gathering</li>
+                            <li>Created and configured OOTB web parts, custom web parts, and email-enabled document libraries</li>
+                            <li>Designed InfoPath forms with advanced rules and data connections to SharePoint lists and SQL</li>
+                            <li>Built custom Power Apps forms integrated with MS Flow for automated workflow actions</li>
+                            <li>Installed and configured SharePoint Server 2013 development environment with proper security</li>
+                            <li>Provided technical support to end-users and resolved day-to-day SharePoint issues</li>
+                        </ul>
+                        <div class="tech-stack">
+                            <span class="tech-tag">SharePoint 2013/Online</span>
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">InfoPath</span>
+                            <span class="tech-tag">Power Apps</span>
+                            <span class="tech-tag">MS Flow</span>
+                            <span class="tech-tag">SQL Server</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h3>MBA (Master of Business Administration)</h3>
+                    <p>University of Illinois</p>
+                    <p style="color: #3498db; font-weight: 600;">Expected Graduation: April 2027</p>
+                </div>
+                <div class="education-item">
+                    <h3>B.S. in Computer Science</h3>
+                    <p>University of Maryland </p>
+                </div>
+                <div class="education-item">
+                    <h3>Project Management Certificate</h3>
+                    <p>University of Maryland </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Profile image upload
+        document.getElementById('uploadBtn').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    document.getElementById('profileImg').src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Add click animation to profile icon
+        document.querySelector('.profile-icon').addEventListener('click', function() {
+            this.style.animation = 'none';
+            setTimeout(() => {
+                this.style.animation = 'pulse 0.5s ease, float 3s ease-in-out infinite';
+            }, 10);
+        });
+
+        // Add staggered animation to tech tags when they come into view
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'scaleIn 0.5s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.tech-tag, .job, .education-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
